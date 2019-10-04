@@ -25,13 +25,23 @@ import { GatinhoService } from '../gatinho.service';
 export class HomePage {
   //Declaraçao das properidades
   mensagem: string
+  linkImagem:string = ''
 
   constructor(
     private gatinhoService: GatinhoService
     //Declaração dos componentes para uso interno na classe
   ) {
     //Primeiras inicializações
-    this.mensagem = "Hello world!"
+    this.mensagem = "Cat World!"
+    this.gatinhoService.getCuriosidade()
+    .subscribe((curiosidade)=>{
+      console.log("Mensagem recebida: ",curiosidade)
+    })
+    this.gatinhoService.getGatoJPG()
+    .subscribe((gato)=>{
+      console.log("Gato recebido: ", gato)
+      this.linkImagem = gato[0].url
+    })
   }
   //Declaração dos métodos
 }
